@@ -1,14 +1,5 @@
 ---
 # mysql packages
-# mysql-commercial-backup.x86_64              8.0.11-1.1.el7             installed
-# mysql-commercial-client.x86_64              8.0.11-1.1.el7             @mysql8
-# mysql-commercial-common.x86_64              8.0.11-1.1.el7             @mysql8
-# mysql-commercial-devel.x86_64               8.0.11-1.1.el7             installed
-# mysql-commercial-embedded-compat.x86_64     8.0.11-1.1.el7             installed
-# mysql-commercial-libs.x86_64                8.0.11-1.1.el7             @mysql8
-# mysql-commercial-libs-compat.x86_64         8.0.11-1.1.el7             @mysql8
-# mysql-commercial-server.x86_64              8.0.11-1.1.el7             installed
-# mysql-commercial-test.x86_64                8.0.11-1.1.el7             installed
 db_packages: [ 'mysql-community-server', 'mysql-community-common', 'MySQL-python' ]
 
 # create db files 
@@ -29,7 +20,7 @@ dbpass: xyz
 
 # packing / unpacking datbase dump 
 # '!' will cause "gzip: stdout: Broken pipe" issue
-mysql_root_password: Mysql#12345
+mysql_root_password: Mysql#113355
 
 # user details - pass: password
 # to generate the encrypted password: php -r 'echo "*" . strtoupper(sha1(sha1("password", TRUE)));'

@@ -8,7 +8,7 @@
     - common
   tags: 
     - common
-    - setup
+    - deploy
 
 - name: deploy MySQL and configure the databases
   hosts: db
@@ -17,5 +17,5 @@
     - db
   tags: 
     - db
-    - setup
+    - deploy
 
