@@ -1,0 +1,62 @@
+---
+# mysql packages
+# mysql-commercial-backup.x86_64              8.0.11-1.1.el7             installed
+# mysql-commercial-client.x86_64              8.0.11-1.1.el7             @mysql8
+# mysql-commercial-common.x86_64              8.0.11-1.1.el7             @mysql8
+# mysql-commercial-devel.x86_64               8.0.11-1.1.el7             installed
+# mysql-commercial-embedded-compat.x86_64     8.0.11-1.1.el7             installed
+# mysql-commercial-libs.x86_64                8.0.11-1.1.el7             @mysql8
+# mysql-commercial-libs-compat.x86_64         8.0.11-1.1.el7             @mysql8
+# mysql-commercial-server.x86_64              8.0.11-1.1.el7             installed
+# mysql-commercial-test.x86_64                8.0.11-1.1.el7             installed
+db_packages: [ 'mysql-community-server', 'mysql-community-common', 'MySQL-python' ]
+
+# create db files 
+db_dirs:
+    # for pid 
+    - { d: /var/run/mysqld, 	m: '0775' }
+    # - { d: /mnt/data, 		m: '0775' }
+
+db_files:
+    # - { f: /var/log/mysqld.log, m: '0644' }
+    - { f: /var/log/mysqld.log, m: '0775' }
+
+# mysql 8 settings
+dbservice: mysqld
+dbname: foodb
+dbuser: foouser
+dbpass: xyz
+
+# packing / unpacking datbase dump 
+# '!' will cause "gzip: stdout: Broken pipe" issue
+mysql_root_password: Mysql#12345
+
+# user details - pass: password
+# to generate the encrypted password: php -r 'echo "*" . strtoupper(sha1(sha1("password", TRUE)));'
+db_users: 
+    - { user: test,        pass: '*2470C0C06DEE42FD1618BB99005ADCA2EC9D1E19' } 
+
+# mysqld configuration
+innodb_buffer_pool_size: 32G
+innodb_log_file_size: 512M
+expire_logs_days: 3
+
+port: 3306
+lower_case_table_names: 1
+
+socket: /mnt/data/mysql/mysql.sock
+datadir: /mnt/data/mysql
+log_bin: /mnt/data/mysql/binlog
+log_error: /var/log/mysqld.log
+pid_file: /var/run/mysqld/mysqld.pid
+
+# LDAP integration plugin
+plugin_load_add: authentication_ldap_sasl.so
+authentication_ldap_sasl_server_host: 10.74.10.110
+authentication_ldap_sasl_bind_base_dn: "OU=DAC,DC=dac,DC=local"
+authentication_ldap_sasl_user_search_attr: "cn"
+plugin_load_add: authentication_ldap_simple.so
+authentication_ldap_simple_server_host: 10.74.10.110
+authentication_ldap_simple_bind_base_dn: "OU=DAC,DC=dac,DC=local"
+authentication_ldap_simple_user_search_attr: "cn"
+
